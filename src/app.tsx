@@ -7,6 +7,9 @@ import Dashboard from "@/pages/dashboard";
 import Home from "@/pages/home";
 import SignIn from "@/pages/sign-in";
 import SignUp from "@/pages/sign-up";
+import Discover from "@/pages/discover";
+import Spaces from "@/pages/spaces";
+import Finance from "@/pages/finance";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 export function App() {
@@ -14,12 +17,13 @@ export function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/discover" element={<Discover />} />
+        <Route path="/spaces" element={<Spaces />} />
+        <Route path="/finance" element={<Finance />} />
 
-        {/* Authentication routes */}
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
 
-        {/* Billing routes */}
         <Route
           path="/billing"
           element={
@@ -37,7 +41,6 @@ export function App() {
           }
         />
 
-        {/* Chat routes */}
         <Route
           path="/chat"
           element={
@@ -47,7 +50,6 @@ export function App() {
           }
         />
 
-        {/* Admin Dashboard */}
         <Route
           path="/admin"
           element={

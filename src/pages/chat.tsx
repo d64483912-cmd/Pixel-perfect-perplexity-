@@ -1,12 +1,23 @@
 import { SimpleChat } from "@/components/chat/SimpleChat";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
+import { useLocation } from "react-router-dom";
+import PerplexityLayout from "@/components/perplexity/PerplexityLayout";
 
 export default function ChatPage() {
+  const location = useLocation();
+  const initialQuery = location.state?.initialQuery;
+
   const { messages, stop, status, sendMessage } = useChat({
     transport: new DefaultChatTransport({ api: "/api/ai/chat" }),
   });
+
+  useEffect(() => {
+    if (initialQuery && messages.length === 0) {
+      sendMessage({ text: initialQuery });
+    }
+  }, [initialQuery]);
 
   const uiMessages = useMemo(() => {
     const getMessageContent = (msg: any): string => {
@@ -26,7 +37,6 @@ export default function ChatPage() {
     }));
   }, [messages]);
 
-  // Map ChatStatus to SimpleChat's expected status type
   const showThinking = useMemo(() => {
     if (status === "submitted") return true;
     if (status !== "streaming") return false;
@@ -36,21 +46,20 @@ export default function ChatPage() {
     return lastMessage.content.trim().length === 0;
   }, [status, uiMessages]);
 
-  // Disable input and show stop button during both submitted and streaming
   const isLoading = status === "streaming" || status === "submitted";
 
   return (
-    <div className="min-h-screen">
-      <div className="h-[calc(100vh-4rem)]">
+    <PerplexityLayout>
+      <div className="h-screen">
         <SimpleChat
           messages={uiMessages}
           onSend={(text) => sendMessage({ text })}
           isLoading={isLoading}
           onStop={stop}
-          title="Chat"
+          title="Nelson-GPT Chat"
           showThinking={showThinking}
         />
       </div>
-    </div>
+    </PerplexityLayout>
   );
 }

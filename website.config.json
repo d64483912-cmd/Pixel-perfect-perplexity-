@@ -1,13 +1,13 @@
 {
   "site": {
-    "name": "Minimal Starter",
-    "tagline": "Your Creative Canvas",
-    "description": "A clean, minimal starter template providing the perfect foundation for your next project. Built with modern tools and ready for your creativity.",
+    "name": "Nelson-GPT",
+    "tagline": "Pediatric Knowledge at Your Finger Tips",
+    "description": "Your intelligent assistant for pediatric knowledge. Get instant, accurate answers to your questions about child health, development, and care.",
     "ogImage": "/og-image.png",
     "twitterHandle": "",
     "contact": {
-      "email": "contact@example.com",
-      "company": "Your Company",
+      "email": "contact@nelson-gpt.com",
+      "company": "Nelson-GPT",
       "address": ""
     },
     "legal": {
@@ -16,6 +16,6 @@
     }
   },
   "theme": {
-    "defaultTheme": "dark"
+    "defaultTheme": "light"
   }
 }

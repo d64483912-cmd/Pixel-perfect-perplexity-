@@ -29,24 +29,10 @@ const app = new Hono<HonoContext>()
     return c.json(user);
   })
   // Mount routers
-  .route("/api", apiRoutes)
-  .all("*", async (c) => {
-    const url = new URL(c.req.url);
-    const isHtmlRoute =
-      c.req.method === "GET" &&
-      (!url.pathname.includes(".") || url.pathname.endsWith("/"));
+  .route("/api", apiRoutes);
 
-    if (isHtmlRoute) {
-      const indexUrl = new URL("/index.html", url.origin);
-      const req = new Request(indexUrl.toString(), c.req.raw);
-      const resp = await c.env.ASSETS.fetch(req);
-      const out = new Response(resp.body, resp);
-      out.headers.set("Content-Type", "text/html; charset=utf-8");
-      out.headers.delete("Content-Disposition");
-      return out;
-    }
-    return c.env.ASSETS.fetch(c.req.raw);
-  });
+// Vercel handles static files and SPA fallback via vercel.json
+// No catch-all route needed
 
 export type AppType = typeof apiRoutes;
 export default app;

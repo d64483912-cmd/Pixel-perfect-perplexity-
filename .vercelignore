@@ -4,6 +4,6 @@ dist
 .env
 .env.local
 *.log
-drizzle
 wrangler.jsonc
 worker-configuration.d.ts
+drizzle

@@ -1,0 +1,9 @@
+node_modules
+.wrangler
+dist
+.env
+.env.local
+*.log
+wrangler.jsonc
+worker-configuration.d.ts
+drizzle
